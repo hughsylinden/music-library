@@ -68,4 +68,22 @@ async function update(req, res) {
   }
 }
 
-module.exports = { create, read, readOne, update };
+async function destroy(req, res) {
+  try{
+    const db = await getDb();
+
+    const [artists] = await db.query('DELETE FROM Artist WHERE id=?', [
+      req.params.artistId
+    ]);
+    if(artists.affectedRows==0){
+      res.sendStatus(404);
+    }else{
+      res.status(200).json(artists);
+    }  
+    db.close();
+  }catch(err){
+    res.sendStatus(500);
+  }
+}
+
+module.exports = { create, read, readOne, update, destroy };
