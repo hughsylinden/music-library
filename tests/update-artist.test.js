@@ -28,6 +28,7 @@ describe('update artist', () => {
 
   afterEach(async () => {
     await db.query('DELETE FROM Artist');
+    await db.query('DELETE FROM Album');
     await db.close();
   });
 

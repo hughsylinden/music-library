@@ -51,7 +51,8 @@ async function update(req, res) {
     ]);
     const data = {
       name: req.body.name,
-      year: req.body.year
+      year: req.body.year,
+      //artistId: albums.artistId
     }
     if(albums){
       await db.query('UPDATE Album SET ? WHERE id = ?', [
