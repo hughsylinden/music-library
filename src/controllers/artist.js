@@ -57,7 +57,6 @@ async function update(req, res) {
         data,
         req.params.artistId
       ]);
-
       res.status(200).json(artists);
     }else{
       res.sendStatus(404);
