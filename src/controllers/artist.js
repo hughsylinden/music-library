@@ -15,14 +15,14 @@ async function create(req, res) {
 }
 
 async function read(req, res) {
+  const db = await getDb();
   try{
-    const db = await getDb();
-    const [artists] = await db.query(`SELECT * FROM Artist;`);
+    const [artists] = await db.query(`SELECT * FROM Artist`);
     res.status(200).json(artists);
-    db.close();
   }catch(err){
-    res.sendStatus(500);
+    res.sendStatus(404);
   }
+  db.close();
 }
 
 async function readOne(req, res) {

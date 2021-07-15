@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 
-const { DB_PASSWORD, DB_USER, DB_HOST, DB_PORT, CLEARDB_DATABASE_URL } = process.env;
+const { DB_PASSWORD, DB_NAME, DB_USER, DB_HOST, DB_PORT, CLEARDB_DATABASE_URL } = process.env;
 
 module.exports = async () => {
   const db = CLEARDB_DATABASE_URL ? 
@@ -10,6 +10,7 @@ module.exports = async () => {
       user: DB_USER,
       password: DB_PASSWORD,
       port: DB_PORT,
+      database: DB_NAME,
     });
   return db;
 };
