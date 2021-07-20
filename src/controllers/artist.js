@@ -20,6 +20,7 @@ async function read(req, res) {
     const [artists] = await db.query(`SELECT * FROM Artist`);
     res.status(200).json(artists);
   }catch(err){
+    console.log(err)
     res.sendStatus(404);
   }
   db.close();
