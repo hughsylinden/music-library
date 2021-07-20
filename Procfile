@@ -1,1 +1,1 @@
-web: npm start
+web: node ./utils/createdatabase.js && node index.js
