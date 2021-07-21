@@ -6,7 +6,7 @@ const path = require('path');
 const args = process.argv.slice(2)[0];
 
 const envFile = args === 'test' ? '../.env.test' : '../.env';
-process.env.CLEARDB_DATABASE_URL || require('dotenv').config({
+require('dotenv').config({
   path: path.join(__dirname, envFile),
 });
 

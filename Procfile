@@ -1,1 +1,1 @@
-web: node ./utils/create-database.js && node index.js
+web: node index.js
