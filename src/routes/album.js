@@ -3,10 +3,9 @@ const express = require('express');
 
 const albumRouter = express.Router();
 
-albumRouter.post('/artist/:artistId/album', albumController.create);
-albumRouter.get('/album', albumController.read);
-albumRouter.get('/album/:albumId', albumController.readOne);
-albumRouter.patch('/album/:albumId', albumController.update);
-albumRouter.delete('/album/:albumId', albumController.destroy);
+albumRouter.get('/', albumController.read);
+albumRouter.get('/:albumId', albumController.readOne);
+albumRouter.patch('/:albumId', albumController.update);
+albumRouter.delete('/:albumId', albumController.destroy);
 
 module.exports = albumRouter;

@@ -12,21 +12,21 @@ describe('create album and assign to artist', () => {
     await Promise.all([
       db.query('INSERT INTO Artist (name, genre) VALUES(?, ?)', [
         'Oasis',
-        'rock'
+        'rock',
       ]),
       db.query('INSERT INTO Artist (name, genre) VALUES(?, ?)', [
         'Pink Floyd',
-        'rock'
-      ])
-    ]);   
+        'rock',
+      ]),
+    ]);
     [artists] = await db.query('SELECT * FROM Artist');
     await Promise.all([
       db.query('INSERT INTO Album (name, year, artistId) VALUES(?, ?, ?)', [
         'Animals',
         1977,
-        artists[1].id
-      ])
-    ]); 
+        artists[1].id,
+      ]),
+    ]);
     [albums] = await db.query('SELECT * FROM Album');
   });
 
@@ -41,7 +41,7 @@ describe('create album and assign to artist', () => {
       it('updates an album in the database', async () => {
         const res = await request(app).patch(`/album/${albums[0].id}`).send({
           name: 'Animals',
-          year: 1988
+          year: 1988,
         });
 
         expect(res.status).to.equal(200);
@@ -52,7 +52,7 @@ describe('create album and assign to artist', () => {
         expect(albumEntries.name).to.equal('Animals');
         expect(albumEntries.year).to.equal(1988);
         expect(albumEntries.artistId).to.equal(albums[0].artistId);
-      });      
+      });
     });
   });
 });

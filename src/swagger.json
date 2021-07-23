@@ -1,0 +1,104 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Artist",
+    "description": "",
+    "version": "1.0"
+  },
+  "paths": {
+    "/artist": {
+      "get": {
+        "tags": ["artists"],
+        "summary": "Get all artist",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Artists"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Artist"],
+        "description": "Create new artist in system",
+        "parameters": [
+          {
+            "name": "artist",
+            "in": "body",
+            "description": "Artist that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New artist is created",
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            }
+          }
+        }
+      }
+    },
+    "/artist/{artistId}": {
+      "get": {
+        "tags": ["artists"],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "number",
+            "name": "artistId",
+            "required": true
+          }
+        ],
+        "summary": "Get all artist",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Artists"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Artist": {
+      "required": ["name", "_id", "companies"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "genre": {
+          "type": "string"
+        },
+        "albums": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "year": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Artists": {
+      "type": "array",
+      "$ref": "#/definitions/Artist"
+    }
+  }
+}

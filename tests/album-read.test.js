@@ -12,31 +12,31 @@ describe('read artist', () => {
     await Promise.all([
       db.query('INSERT INTO Artist (name, genre) VALUES(?, ?)', [
         'Oasis',
-        'rock'
+        'rock',
       ]),
       db.query('INSERT INTO Artist (name, genre) VALUES(?, ?)', [
         'Pink Floyd',
-        'rock'
-      ])
-    ]);   
+        'rock',
+      ]),
+    ]);
     [artists] = await db.query('SELECT * FROM Artist');
     await Promise.all([
       db.query('INSERT INTO Album (name, year, artistId) VALUES(?, ?, ?)', [
         'Animals',
         1977,
-        artists[1].id
+        artists[1].id,
       ]),
       db.query('INSERT INTO Album (name, year, artistId) VALUES(?, ?, ?)', [
         'Dark Side of The Moon',
         1973,
-        artists[1].id
+        artists[1].id,
       ]),
       db.query('INSERT INTO Album (name, year, artistId) VALUES(?, ?, ?)', [
         'Definitely Maybe',
         1994,
-        artists[0].id
-      ])
-    ]); 
+        artists[0].id,
+      ]),
+    ]);
     [albums] = await db.query('SELECT * FROM Album');
   });
   afterEach(async () => {

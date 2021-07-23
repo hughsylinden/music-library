@@ -12,21 +12,21 @@ describe('create album and assign to artist', () => {
     await Promise.all([
       db.query('INSERT INTO Artist (name, genre) VALUES(?, ?)', [
         'Oasis',
-        'rock'
+        'rock',
       ]),
       db.query('INSERT INTO Artist (name, genre) VALUES(?, ?)', [
         'Pink Floyd',
-        'rock'
-      ])
-    ]);   
+        'rock',
+      ]),
+    ]);
     [artists] = await db.query('SELECT * FROM Artist');
     await Promise.all([
       db.query('INSERT INTO Album (name, year, artistId) VALUES(?, ?, ?)', [
         'Animals',
         1977,
-        artists[1].id
-      ])
-    ]); 
+        artists[1].id,
+      ]),
+    ]);
     [albums] = await db.query('SELECT * FROM Album');
   });
 
@@ -44,9 +44,10 @@ describe('create album and assign to artist', () => {
 
         expect(res.status).to.equal(200);
 
-        const [
-          [deletedAlbumRecord],
-        ] = await db.query('SELECT * FROM Album WHERE id = ?', [album.id]);
+        const [[deletedAlbumRecord]] = await db.query(
+          'SELECT * FROM Album WHERE id = ?',
+          [album.id]
+        );
 
         expect(!!deletedAlbumRecord).to.be.false;
       });
